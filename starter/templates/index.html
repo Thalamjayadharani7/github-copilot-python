@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A focused Sudoku game with hints and a local leaderboard.">
+  <title>Sudoku | Daily Grid</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar"><p class="eyebrow">Daily grid</p><h1>Sudoku</h1></header>
+    <section class="game-layout" aria-label="Sudoku game">
+      <div class="board-column">
+        <div class="game-toolbar">
+          <div class="toolbar-group"><label for="difficulty">Difficulty</label><select id="difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
+          <button id="new-game" class="button button-primary" type="button">New game</button>
+        </div>
+        <div class="number-tools" aria-label="Number tracking and notes">
+          <div class="number-picker" role="group" aria-label="Track a number">
+            <span class="tool-label">Track</span>
+            <div id="number-tracker" class="digit-buttons"></div>
+            <span id="number-count" class="number-count" aria-live="polite">Select a digit</span>
+          </div>
+          <button id="note-mode" class="button button-secondary" type="button" aria-pressed="false">Note mode: Off</button>
+          <span class="tool-help">In note mode, type 1–9 to add or remove candidates.</span>
+        </div>
+        <div id="sudoku-board" class="sudoku-board" role="grid" aria-label="Sudoku board"></div>
+        <div class="game-footer">
+          <p id="message" class="message" role="status" aria-live="polite"></p>
+          <div class="controls" aria-label="Puzzle controls">
+            <button id="check-solution" class="button button-secondary" type="button">Check puzzle</button>
+            <button id="hint-button" class="button button-hint" type="button">Hint</button>
+            <button id="solver-toggle" class="button button-secondary" type="button" aria-expanded="false" aria-controls="solver-panel">Visual solver</button>
+            <button id="theme-toggle" class="icon-button" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Switch theme">☾</button>
+          </div>
+          <div class="legend" aria-label="Cell state legend">
+            <span><i class="legend-swatch legend-wrong"></i>Wrong answer</span>
+            <span><i class="legend-swatch legend-duplicate"></i>Duplicate number</span>
+            <span><i class="legend-swatch legend-hint"></i>Hinted and locked</span>
+          </div>
+          <div class="stats" aria-label="Game statistics"><div><span class="stat-label">Time</span><strong id="timer">00:00</strong></div><div><span class="stat-label">Hints used</span><strong id="hint-count">0</strong></div></div>
+        </div>
+        <section id="solver-panel" class="solver-panel" hidden aria-labelledby="solver-title">
+          <h2 id="solver-title">Visual solver</h2>
+          <p id="solver-status" role="status" aria-live="polite">Solve a copy of the puzzle step by step.</p>
+          <div class="solver-controls">
+            <button id="solver-play" class="button button-primary" type="button">Play</button>
+            <button id="solver-step" class="button button-secondary" type="button">Step</button>
+            <label for="solver-speed">Speed</label><input id="solver-speed" type="range" min="100" max="1200" step="100" value="500"><button id="solver-reset" class="button button-quiet" type="button">Reset</button>
+          </div>
+          <div id="solver-board" class="solver-board" role="grid" aria-label="Solver preview"></div>
+        </section>
+      </div>
+    </section>
+    <section class="leaderboard" aria-labelledby="leaderboard-title">
+      <div class="section-heading"><p class="eyebrow">Fastest solves</p><h2 id="leaderboard-title">Top 10 Fastest Times</h2></div>
+      <div class="leaderboard-table" role="table" aria-label="Top 10 fastest times"><div class="leaderboard-head" role="row"><span>Rank</span><span>Name</span><span>Time</span><span>Level</span><span>Hints</span></div><ol id="leaderboard-list" class="leaderboard-list"></ol></div>
+      <p id="empty-leaderboard" class="empty-state">Finish a puzzle to join the board.</p>
+    </section>
+  </main>
+  <dialog id="completion-dialog" class="completion-dialog"><form method="dialog" id="completion-form"><p class="eyebrow">Grid complete</p><h2>Excellent work.</h2><p id="completion-summary"></p><p id="appreciation-quote" class="appreciation-quote" role="status"></p><label for="player-name">Your name</label><input id="player-name" name="player-name" maxlength="24" autocomplete="name" placeholder="Enter your name" required><div class="dialog-actions"><button id="save-score" class="button button-primary" value="default">Save score</button><button id="skip-score" class="button button-quiet" value="cancel">Maybe later</button></div></form></dialog>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  <script src="/static/main.js?v=3"></script>
+</body>
+</html>

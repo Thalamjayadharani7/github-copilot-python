@@ -1,0 +1,13 @@
+{
+  "name": "Sudoku Flask Copilot prompts",
+  "version": 1,
+  "prompts": [
+    {"id": "feature", "category": "development", "title": "Implement a feature", "prompt": "Inspect the existing Flask Sudoku architecture, preserve behavior, implement this feature surgically, and add focused tests: {{feature}}"},
+    {"id": "debug", "category": "debugging", "title": "Trace a bug", "prompt": "Reproduce {{bug}}, inspect the smallest relevant code path, identify the root cause, fix it without weakening validation, and rerun the relevant tests."},
+    {"id": "test", "category": "testing", "title": "Add regression tests", "prompt": "Add deterministic pytest coverage for {{behavior}}, including valid, invalid, boundary, and regression cases. Run the focused and complete suites."},
+    {"id": "ui", "category": "ui", "title": "Improve the interface", "prompt": "Improve {{ui_area}} while matching the existing visual language, responsive layout, light/dark themes, and progressive enhancement. Verify keyboard and mobile behavior."},
+    {"id": "accessibility", "category": "accessibility", "title": "Audit WCAG", "prompt": "Audit {{surface}} against practical WCAG 2.1 AA checks: semantics, labels, focus, keyboard use, contrast, announcements, and non-color indicators. Fix measurable issues and report evidence."},
+    {"id": "security", "category": "security", "title": "Review security", "prompt": "Review {{surface}} for input validation, injection, XSS, state isolation, secrets, and unsafe browser storage. Report severity, evidence, and minimal fixes."},
+    {"id": "review", "category": "code review", "title": "Review a change", "prompt": "Review the diff for correctness, regressions, missing tests, accessibility, and maintainability. Prioritize actionable findings with file and line evidence."}
+  ]
+}
