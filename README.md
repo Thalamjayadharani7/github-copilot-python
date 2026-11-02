@@ -39,6 +39,7 @@ From `starter`:
 .venv\Scripts\python.exe -m pytest -q
 python -m json.tool ..\prompts.json
 python -m py_compile app.py sudoku_logic.py
+node --check static\main.js
 ```
 
 ## Structure
@@ -67,7 +68,7 @@ Existing genuine captures are in [`Screenshots/`](Screenshots/), including the n
 ![Errors and duplicates](Screenshots/errors-and-duplicates.png)
 ![Mobile audit](Screenshots/mobile-audit.png)
 
-Additional evidence files include `difficulty-selector.png`, `hinted-cell-green.png`, `wrong-answer-red.png`, `duplicate-conflict-border.png`, `timer-running.png`, `incomplete-puzzle-feedback.png`, `leaderboard.png`, `successful-completion.png`, `keyboard-focus.png`, `accessibility-controls.png`, and `accessibility-contrast-evidence.png`. `final-tests.png` and a historical Copilot conversation capture were unavailable; no evidence was fabricated.
+Additional evidence files include `difficulty-selector.png`, `hinted-cell-green.png`, `wrong-answer-red.png`, `duplicate-conflict-border.png`, `timer-running.png`, `incomplete-puzzle-feedback.png`, `leaderboard.png`, `successful-completion.png`, `keyboard-focus.png`, `accessibility-controls.png`, `accessibility-contrast-evidence.png`, and `final-tests.png` containing the actual final verification output. A historical Copilot conversation capture was unavailable and was not fabricated.
 
 A live GitHub Copilot conversation capture was not available, so none is fabricated.
 

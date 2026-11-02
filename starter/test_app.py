@@ -80,6 +80,32 @@ def test_hints_are_correct_locked_and_not_repeated():
     assert 'cannot be changed' in modified.get_json()['error']
 
 
+def test_hints_skip_user_filled_cells_and_report_when_exhausted():
+    client = app.test_client()
+    puzzle = client.get('/new?difficulty=easy').get_json()['puzzle']
+    board = sudoku_logic.deep_copy(puzzle)
+    solution = sudoku_logic.deep_copy(CURRENT['solution'])
+    empty_cells = [(row, col) for row in range(9) for col in range(9) if puzzle[row][col] == 0]
+    user_cell = empty_cells[0]
+    board[user_cell[0]][user_cell[1]] = solution[user_cell[0]][user_cell[1]]
+
+    hinted_cells = []
+    for _ in range(len(empty_cells) - 1):
+        response = client.post('/hint', json={'board': board})
+        assert response.status_code == 200
+        data = response.get_json()
+        position = (data['row'], data['col'])
+        assert position != user_cell
+        assert position not in hinted_cells
+        assert data['value'] == solution[data['row']][data['col']]
+        board[data['row']][data['col']] = data['value']
+        hinted_cells.append(position)
+
+    exhausted = client.post('/hint', json={'board': board})
+    assert exhausted.status_code == 400
+    assert exhausted.get_json()['error'] == 'There are no more hints available.'
+
+
 def test_hint_rejects_changes_to_original_clues():
     client = app.test_client()
     puzzle = client.get('/new?difficulty=easy').get_json()['puzzle']
@@ -199,6 +225,7 @@ def test_page_includes_script_that_locks_prefilled_cells():
     assert 'Duplicate number' in response.get_data(as_text=True)
     assert 'Hinted and locked' in response.get_data(as_text=True)
     assert 'appreciation-quote' in response.get_data(as_text=True)
+    assert 'while (index >= 0 && index < cells.length && cells[index].disabled)' in script
 
 
 def test_check_rejects_invalid_board_values():

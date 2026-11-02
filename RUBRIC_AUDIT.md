@@ -6,7 +6,7 @@ The original external rubric was not present in the workspace. The supplied task
 
 - **PASS** — Easy, Medium, and Hard generation: browser observed 42, 34, and 28 locked clues; pytest covers uniqueness and validity.
 - **PASS** — Original clues and hinted cells are locked; backend rejects tampering.
-- **PASS** — Hints are correct, non-repeating, counted, green, and locked.
+- **PASS** — Hints are correct, non-repeating, counted exactly once per click, green, and locked; repeated browser clicks completed an Easy puzzle with 39 hints.
 - **PASS** — Check Puzzle distinguishes empty, incorrect, duplicate, and complete states.
 - **PASS** — Timer starts, resets, stops on completion, and does not create overlapping intervals.
 - **PASS** — Light/dark themes work and theme persistence was verified after refresh.
@@ -21,18 +21,18 @@ The original external rubric was not present in the workspace. The supplied task
 
 ## Verification commands
 
-- **PASS** — `python -m pytest -q`: 13 passed.
+- **PASS** — `python -m pytest -q`: 14 passed.
 - **PASS** — `node --check starter\static\main.js`.
 - **PASS** — `python -m py_compile app.py sudoku_logic.py`.
 - **PASS** — `python -m json.tool prompts.json`.
 - **PASS** — Browser smoke and end-to-end checks executed against `http://127.0.0.1:5000`.
 - **PASS** — Browser console/page-error check returned zero errors after the final script and CSS changes.
-- **PASS** — Genuine screenshots cover the main themes, difficulty, hints, wrong answers, duplicates, timer, incomplete feedback, leaderboard, tracking, notes, solver, focus, controls, contrast evidence, mobile layout, and completion.
+- **PASS** — Genuine screenshots cover the main themes, difficulty, hints, wrong answers, duplicates, timer, incomplete feedback, leaderboard, tracking, notes, solver, focus, controls, contrast evidence, mobile layout, completion, and final verification output in `Screenshots/final-tests.png`.
 
 ## Not verified or requiring manual tooling
 
 - **NOT VERIFIED** — Formal WCAG 2.1 AA certification and exhaustive contrast coverage for every state/combination; representative states were measured programmatically.
 - **NOT VERIFIED** — Full screen-reader testing with NVDA/JAWS/VoiceOver.
 - **NOT VERIFIED** — Historical GitHub Copilot conversation screenshot; none was fabricated.
-- **NOT VERIFIED** — A terminal-output screenshot named `final-tests.png`; command results are recorded in this audit instead.
+- **PASS** — `Screenshots/final-tests.png` records the actual final verification output: 14 passed plus Python, JavaScript, and JSON checks.
 - **NOT VERIFIED** — Original rubric-specific score because that rubric file was unavailable.
